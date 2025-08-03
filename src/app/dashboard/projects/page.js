@@ -11,6 +11,7 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useProjects, useDeleteProject } from "@/hooks/useProjects";
 import {
 	FiPlus,
 	FiSearch,
@@ -22,7 +23,8 @@ import {
 	FiUsers,
 	FiClock,
 	FiFolder,
-	FiCheckSquare
+	FiCheckSquare,
+	FiLoader
 } from "react-icons/fi";
 
 // Mock data
