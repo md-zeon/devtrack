@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
 import {
 	Sidebar,
 	SidebarContent,
@@ -63,6 +64,15 @@ const settingsItems = [
 
 export function DashboardSidebar() {
 	const pathname = usePathname();
+	const { data: session } = useSession();
+
+	const getInitials = (name) => {
+		return name
+			?.split(" ")
+			.map(n => n[0])
+			.join("")
+			.toUpperCase() || "U";
+	};
 
 	return (
 		<Sidebar className='w-64 border-r'>
@@ -139,14 +149,14 @@ export function DashboardSidebar() {
 				<div className='flex items-center space-x-3 p-2 rounded-lg bg-gray-50 dark:bg-gray-800'>
 					<Avatar className='h-8 w-8'>
 						<AvatarImage
-							src='/placeholder-avatar.jpg'
+							src={session?.user?.image}
 							alt='User'
 						/>
-						<AvatarFallback>JD</AvatarFallback>
+						<AvatarFallback>{getInitials(session?.user?.name)}</AvatarFallback>
 					</Avatar>
 					<div className='flex-1 min-w-0'>
-						<p className='text-sm font-medium truncate'>John Doe</p>
-						<p className='text-xs text-muted-foreground truncate'>john@example.com</p>
+						<p className='text-sm font-medium truncate'>{session?.user?.name}</p>
+						<p className='text-xs text-muted-foreground truncate'>{session?.user?.email}</p>
 					</div>
 				</div>
 			</SidebarFooter>

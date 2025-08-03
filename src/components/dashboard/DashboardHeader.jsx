@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { useSession, signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
 	DropdownMenu,
@@ -22,22 +24,41 @@ import {
 	FiMoon,
 	FiPlus
 } from "react-icons/fi";
+import { toast } from "sonner";
 
 export function DashboardHeader() {
+	const { data: session } = useSession();
+	const router = useRouter();
 	const [notifications] = useState([
 		{ id: 1, title: "Task completed", time: "2 min ago" },
 		{ id: 2, title: "New project assigned", time: "1 hour ago" },
 		{ id: 3, title: "Deadline reminder", time: "3 hours ago" },
 	]);
 
-	const handleLogout = () => {
-		// TODO: Implement logout with NextAuth
-		console.log("Logout clicked");
+	const handleLogout = async () => {
+		await signOut({ redirect: false });
+		toast.success("Logged out successfully");
+		router.push("/");
 	};
 
 	const handleNewProject = () => {
-		// TODO: Open new project modal
-		console.log("New project clicked");
+		router.push("/dashboard/projects?new=true");
+	};
+
+	const handleProfile = () => {
+		router.push("/dashboard/profile");
+	};
+
+	const handleSettings = () => {
+		router.push("/dashboard/settings");
+	};
+
+	const getInitials = (name) => {
+		return name
+			?.split(" ")
+			.map(n => n[0])
+			.join("")
+			.toUpperCase() || "U";
 	};
 
 	return (
@@ -99,26 +120,26 @@ export function DashboardHeader() {
 						<DropdownMenuTrigger asChild>
 							<Button variant="ghost" className="relative h-8 w-8 rounded-full">
 								<Avatar className="h-8 w-8">
-									<AvatarImage src="/placeholder-avatar.jpg" alt="User" />
-									<AvatarFallback>JD</AvatarFallback>
+									<AvatarImage src={session?.user?.image} alt="User" />
+									<AvatarFallback>{getInitials(session?.user?.name)}</AvatarFallback>
 								</Avatar>
 							</Button>
 						</DropdownMenuTrigger>
 						<DropdownMenuContent className="w-56" align="end" forceMount>
 							<DropdownMenuLabel className="font-normal">
 								<div className="flex flex-col space-y-1">
-									<p className="text-sm font-medium leading-none">John Doe</p>
+									<p className="text-sm font-medium leading-none">{session?.user?.name}</p>
 									<p className="text-xs leading-none text-muted-foreground">
-										john@example.com
+										{session?.user?.email}
 									</p>
 								</div>
 							</DropdownMenuLabel>
 							<DropdownMenuSeparator />
-							<DropdownMenuItem>
+							<DropdownMenuItem onClick={handleProfile}>
 								<FiUser className="mr-2 h-4 w-4" />
 								<span>Profile</span>
 							</DropdownMenuItem>
-							<DropdownMenuItem>
+							<DropdownMenuItem onClick={handleSettings}>
 								<FiSettings className="mr-2 h-4 w-4" />
 								<span>Settings</span>
 							</DropdownMenuItem>
