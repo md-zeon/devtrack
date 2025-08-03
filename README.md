@@ -1,37 +1,105 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# DevTrack
 
-## Getting Started
+DevTrack is a personal developer project and task tracker built with Next.js, MongoDB, and Tailwind CSS. It helps developers organize their projects, manage tasks, and boost productivity with a clean and intuitive dashboard.
 
-First, run the development server:
+---
+
+## Features
+
+* User authentication with NextAuth (Google & Email)
+* Responsive landing page with Hero, Features, Testimonials, FAQ, and more
+* Protected dashboard for managing projects and tasks (CRUD)
+* Booking/checkout simulation for project planning
+* Modern UI built with Tailwind CSS and Shadcn UI components
+* Server-side and client-side data fetching using Next.js and React Query
+* SEO optimized with Next.js metadata and Open Graph tags
+
+---
+
+## Tech Stack
+
+* [Next.js 13 (App Router)](https://nextjs.org/)
+* [NextAuth.js](https://next-auth.js.org/) for authentication
+* [MongoDB](https://www.mongodb.com/) with official Node.js driver for database
+* [Tailwind CSS](https://tailwindcss.com/) for styling
+* [Shadcn UI](https://ui.shadcn.com/) for accessible UI components
+* [React Query](https://tanstack.com/query/latest) for client-side data fetching and caching
+* [React Hook Form](https://react-hook-form.com/) for form management
+* [React Hot Toast](https://react-hot-toast.com/) for notifications
+
+---
+
+## Setup Instructions
+
+1. **Clone the repository**
+
+```bash
+git clone https://github.com/md-zeon/devtrack.git
+cd devtrack
+```
+
+2. **Install dependencies**
+
+```bash
+npm install
+```
+
+3. **Configure environment variables**
+
+Create a `.env.local` file in the root and add:
+
+```env
+MONGODB_URI=your_mongodb_connection_string
+NEXTAUTH_SECRET=your_nextauth_secret
+NEXTAUTH_URL=http://localhost:3000
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+```
+
+4. **Run the development server**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to see the app.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Folder Structure
 
-## Learn More
+```
+src/
+├── app/                   # Next.js App Router pages and layouts
+│   ├── api/               # API routes
+│   ├── dashboard/         # Protected dashboard pages
+│   ├── about/             # Public about page
+│   ├── contact/           # Public contact page
+│   ├── layout.js          # Root layout
+│   └── page.js            # Landing page
+├── components/            # UI components (Hero, Features, Cards, etc.)
+├── lib/                   # Utilities (MongoDB client, auth helpers)
+├── hooks/                 # Custom React hooks
+└── styles/                # Global styles
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+You can deploy DevTrack easily on platforms like [Vercel](https://vercel.com/) which supports Next.js out of the box.
 
-## Deploy on Vercel
+Make sure to add your environment variables on your deployment platform.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# devtrack
+## License
+
+This project is open source and available under the MIT License.
+
+---
+
+## Contact
+
+Created by [Zeon](https://github.com/md-zeon).
+For questions or support, email: [zeon.cse@gmail.com](mailto:zeon.cse@gmail.com)
