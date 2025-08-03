@@ -1,0 +1,155 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import {
+	Sidebar,
+	SidebarContent,
+	SidebarFooter,
+	SidebarGroup,
+	SidebarGroupContent,
+	SidebarGroupLabel,
+	SidebarHeader,
+	SidebarMenu,
+	SidebarMenuButton,
+	SidebarMenuItem,
+} from "@/components/ui/sidebar";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { FiHome, FiFolder, FiCheckSquare, FiCalendar, FiBarChart2, FiSettings, FiUser, FiCode } from "react-icons/fi";
+
+const menuItems = [
+	{
+		title: "Overview",
+		href: "/dashboard",
+		icon: FiHome,
+	},
+	{
+		title: "Projects",
+		href: "/dashboard/projects",
+		icon: FiFolder,
+		badge: "3", // Mock count
+	},
+	{
+		title: "Tasks",
+		href: "/dashboard/tasks",
+		icon: FiCheckSquare,
+		badge: "12", // Mock count
+	},
+	{
+		title: "Calendar",
+		href: "/dashboard/calendar",
+		icon: FiCalendar,
+	},
+	{
+		title: "Analytics",
+		href: "/dashboard/analytics",
+		icon: FiBarChart2,
+	},
+];
+
+const settingsItems = [
+	{
+		title: "Profile",
+		href: "/dashboard/profile",
+		icon: FiUser,
+	},
+	{
+		title: "Settings",
+		href: "/dashboard/settings",
+		icon: FiSettings,
+	},
+];
+
+export function DashboardSidebar() {
+	const pathname = usePathname();
+
+	return (
+		<Sidebar className='w-64 border-r'>
+			<SidebarHeader className='p-6'>
+				<div className='flex items-center space-x-2'>
+					<div className='bg-blue-600 w-8 h-8 rounded-lg flex items-center justify-center'>
+						<FiCode className='h-5 w-5 text-white' />
+					</div>
+					<span className='text-xl font-bold'>DevTrack</span>
+				</div>
+			</SidebarHeader>
+
+			<SidebarContent>
+				<SidebarGroup>
+					<SidebarGroupLabel>Navigation</SidebarGroupLabel>
+					<SidebarGroupContent>
+						<SidebarMenu>
+							{menuItems.map((item) => (
+								<SidebarMenuItem key={item.href}>
+									<SidebarMenuButton
+										asChild
+										isActive={pathname === item.href}
+									>
+										<Link
+											href={item.href}
+											className='flex items-center justify-between'
+										>
+											<div className='flex items-center space-x-3'>
+												<item.icon className='h-4 w-4' />
+												<span>{item.title}</span>
+											</div>
+											{item.badge && (
+												<Badge
+													variant='secondary'
+													className='text-xs'
+												>
+													{item.badge}
+												</Badge>
+											)}
+										</Link>
+									</SidebarMenuButton>
+								</SidebarMenuItem>
+							))}
+						</SidebarMenu>
+					</SidebarGroupContent>
+				</SidebarGroup>
+
+				<SidebarGroup>
+					<SidebarGroupLabel>Account</SidebarGroupLabel>
+					<SidebarGroupContent>
+						<SidebarMenu>
+							{settingsItems.map((item) => (
+								<SidebarMenuItem key={item.href}>
+									<SidebarMenuButton
+										asChild
+										isActive={pathname === item.href}
+									>
+										<Link
+											href={item.href}
+											className='flex items-center space-x-3'
+										>
+											<item.icon className='h-4 w-4' />
+											<span>{item.title}</span>
+										</Link>
+									</SidebarMenuButton>
+								</SidebarMenuItem>
+							))}
+						</SidebarMenu>
+					</SidebarGroupContent>
+				</SidebarGroup>
+			</SidebarContent>
+
+			<SidebarFooter className='p-4'>
+				<div className='flex items-center space-x-3 p-2 rounded-lg bg-gray-50 dark:bg-gray-800'>
+					<Avatar className='h-8 w-8'>
+						<AvatarImage
+							src='/placeholder-avatar.jpg'
+							alt='User'
+						/>
+						<AvatarFallback>JD</AvatarFallback>
+					</Avatar>
+					<div className='flex-1 min-w-0'>
+						<p className='text-sm font-medium truncate'>John Doe</p>
+						<p className='text-xs text-muted-foreground truncate'>john@example.com</p>
+					</div>
+				</div>
+			</SidebarFooter>
+		</Sidebar>
+	);
+}
