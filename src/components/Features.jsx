@@ -1,35 +1,36 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { FaFolder, FaTasks, FaChartLine, FaClock, FaCodeBranch, FaUsers } from "react-icons/fa";
 
 const features = [
 	{
 		title: "Project Organization",
 		description: "Organize all your development projects in one centralized dashboard with intuitive categorization.",
-		icon: "📁"
+		icon: FaFolder
 	},
 	{
 		title: "Task Management", 
 		description: "Create, assign, and track tasks with priority levels, due dates, and progress monitoring.",
-		icon: "✅"
+		icon: FaTasks
 	},
 	{
 		title: "Progress Tracking",
 		description: "Visualize your development progress with charts, statistics, and milestone tracking.",
-		icon: "📊"
+		icon: FaChartLine
 	},
 	{
 		title: "Time Tracking",
 		description: "Monitor time spent on projects and tasks to improve productivity and project estimation.",
-		icon: "⏱️"
+		icon: FaClock
 	},
 	{
 		title: "Code Integration",
 		description: "Connect with your repositories and track commits, branches, and development activity.",
-		icon: "🔗"
+		icon: FaCodeBranch
 	},
 	{
 		title: "Team Collaboration",
 		description: "Share projects, assign tasks to team members, and collaborate effectively on development goals.",
-		icon: "👥"
+		icon: FaUsers
 	}
 ];
 
@@ -50,7 +51,9 @@ export default function Features() {
 					{features.map((feature, index) => (
 						<Card key={index} className="border-0 shadow-lg hover:shadow-xl transition-shadow">
 							<CardHeader className="text-center">
-								<div className="text-4xl mb-4">{feature.icon}</div>
+								<div className="text-4xl mb-4 text-blue-600 dark:text-blue-400 flex justify-center">
+									<feature.icon />
+								</div>
 								<CardTitle className="text-xl font-semibold">{feature.title}</CardTitle>
 							</CardHeader>
 							<CardContent>

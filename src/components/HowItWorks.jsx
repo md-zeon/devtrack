@@ -1,27 +1,29 @@
+import { FaRocket, FaClipboardList, FaEdit, FaChartBar } from "react-icons/fa";
+
 const steps = [
 	{
 		step: "01",
 		title: "Sign Up & Setup",
 		description: "Create your account and set up your developer profile in minutes. Connect your favorite tools and repositories.",
-		icon: "🚀"
+		icon: FaRocket
 	},
 	{
 		step: "02", 
 		title: "Create Projects",
 		description: "Add your development projects with descriptions, technologies, and goals. Organize them by priority and status.",
-		icon: "📋"
+		icon: FaClipboardList
 	},
 	{
 		step: "03",
 		title: "Track Tasks",
 		description: "Break down projects into manageable tasks. Set deadlines, priorities, and track your progress in real-time.",
-		icon: "✏️"
+		icon: FaEdit
 	},
 	{
 		step: "04",
 		title: "Monitor Progress",
 		description: "View detailed analytics, time tracking, and progress reports to optimize your development workflow.",
-		icon: "📈"
+		icon: FaChartBar
 	}
 ];
 
@@ -42,8 +44,8 @@ export default function HowItWorks() {
 					{steps.map((step, index) => (
 						<div key={index} className="text-center group">
 							<div className="relative mb-6">
-								<div className="w-20 h-20 mx-auto bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
-									{step.icon}
+								<div className="w-20 h-20 mx-auto bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform text-blue-600 dark:text-blue-400">
+									<step.icon />
 								</div>
 								<div className="absolute -top-2 -right-2 w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
 									{step.step}
