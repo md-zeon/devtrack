@@ -12,6 +12,8 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useProjects, useDeleteProject } from "@/hooks/useProjects";
+import CreateProjectModal from "@/components/modals/CreateProjectModal";
+import EditProjectModal from "@/components/modals/EditProjectModal";
 import {
 	FiPlus,
 	FiSearch,
@@ -58,6 +60,7 @@ const getPriorityColor = (priority) => {
 export default function ProjectsPage() {
 	const [searchTerm, setSearchTerm] = useState("");
 	const [filterStatus, setFilterStatus] = useState("all");
+	const [editingProjectId, setEditingProjectId] = useState(null);
 	
 	const { data: projects, isLoading, error } = useProjects();
 	const deleteProject = useDeleteProject();
@@ -71,13 +74,11 @@ export default function ProjectsPage() {
 	}) || [];
 
 	const handleCreateProject = () => {
-		// TODO: Open create project modal
-		console.log("Create project clicked");
+		// This is now handled by the CreateProjectModal component
 	};
 
 	const handleEditProject = (projectId) => {
-		// TODO: Open edit project modal
-		console.log("Edit project:", projectId);
+		setEditingProjectId(projectId);
 	};
 
 	const handleDeleteProject = (projectId) => {
@@ -137,10 +138,7 @@ export default function ProjectsPage() {
 						Manage and track all your development projects in one place.
 					</p>
 				</div>
-				<Button onClick={handleCreateProject} className="mt-4 md:mt-0">
-					<FiPlus className="h-4 w-4 mr-2" />
-					New Project
-				</Button>
+				<CreateProjectModal />
 			</div>
 
 			{/* Search and Filters */}
@@ -293,13 +291,17 @@ export default function ProjectsPage() {
 					<p className="text-muted-foreground mb-4">
 						{searchTerm ? "Try adjusting your search terms" : "Get started by creating your first project"}
 					</p>
-					{!searchTerm && (
-						<Button onClick={handleCreateProject}>
-							<FiPlus className="h-4 w-4 mr-2" />
-							Create Project
-						</Button>
-					)}
+					{!searchTerm && <CreateProjectModal />}
 				</div>
+			)}
+			
+			{/* Edit Project Modal */}
+			{editingProjectId && (
+				<EditProjectModal 
+					projectId={editingProjectId}
+					open={!!editingProjectId}
+					onOpenChange={(open) => !open && setEditingProjectId(null)}
+				/>
 			)}
 		</div>
 	);

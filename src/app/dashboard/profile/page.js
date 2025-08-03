@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -9,6 +9,10 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
+import { useProfile, useUpdateProfile } from "@/hooks/useProfile";
+import { useProjects } from "@/hooks/useProjects";
+import { useTasks } from "@/hooks/useTasks";
+import { useSession } from "next-auth/react";
 import {
 	FiEdit3,
 	FiSave,
@@ -27,43 +31,83 @@ import {
 import { toast } from "sonner";
 
 export default function ProfilePage() {
+	const { data: session } = useSession();
+	const { data: profile, isLoading: profileLoading, error: profileError } = useProfile();
+	const { data: projects = [] } = useProjects();
+	const { data: tasks = [] } = useTasks();
+	const updateProfileMutation = useUpdateProfile();
+
 	const [isEditing, setIsEditing] = useState(false);
 	const [profileData, setProfileData] = useState({
-		name: "John Doe",
-		email: "john@example.com",
-		title: "Full Stack Developer",
-		bio: "Passionate developer with 5+ years of experience building web applications. Love working with modern technologies and solving complex problems.",
-		location: "San Francisco, CA",
-		website: "https://johndoe.dev",
-		github: "johndoe",
-		linkedin: "johndoe",
-		twitter: "johndoe",
-		joinDate: "January 2023",
-		avatar: "/placeholder-avatar.jpg"
+		name: "",
+		email: "",
+		title: "",
+		bio: "",
+		location: "",
+		website: "",
+		github: "",
+		linkedin: "",
+		twitter: "",
+		joinDate: "",
+		avatar: ""
 	});
+
+	// Update profileData when profile is loaded
+	useEffect(() => {
+		if (profile) {
+			setProfileData({
+				name: profile.name || session?.user?.name || "",
+				email: profile.email || session?.user?.email || "",
+				title: profile.title || "",
+				bio: profile.bio || "",
+				location: profile.location || "",
+				website: profile.website || "",
+				github: profile.github || "",
+				linkedin: profile.linkedin || "",
+				twitter: profile.twitter || "",
+				joinDate: profile.createdAt ? new Date(profile.createdAt).toLocaleDateString() : "",
+				avatar: profile.avatar || session?.user?.image || ""
+			});
+		} else if (session?.user) {
+			// Use session data as fallback
+			setProfileData(prev => ({
+				...prev,
+				name: session.user.name || "",
+				email: session.user.email || "",
+				avatar: session.user.image || ""
+			}));
+		}
+	}, [profile, session]);
+
+	// Calculate real stats
+	const completedProjects = projects.filter(p => p.status === 'completed').length;
+	const totalTasks = tasks.length;
+	const completedTasks = tasks.filter(t => t.completed || t.status === 'completed').length;
+	const totalHours = Math.round((tasks.reduce((sum, task) => sum + (task.timeSpent || 0), 0)) / 60);
+	const successRate = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
 
 	const stats = [
 		{
 			label: "Projects Completed",
-			value: "24",
+			value: completedProjects.toString(),
 			icon: FiAward,
 			color: "text-green-600"
 		},
 		{
 			label: "Total Tasks",
-			value: "187",
+			value: totalTasks.toString(),
 			icon: FiTrendingUp,
 			color: "text-blue-600"
 		},
 		{
 			label: "Hours Logged",
-			value: "1,240",
+			value: totalHours.toString(),
 			icon: FiCalendar,
 			color: "text-purple-600"
 		},
 		{
 			label: "Success Rate",
-			value: "94%",
+			value: `${successRate}%`,
 			icon: FiTrendingUp,
 			color: "text-orange-600"
 		}
@@ -75,38 +119,55 @@ export default function ProfilePage() {
 		"TailwindCSS", "Git", "REST APIs", "GraphQL"
 	];
 
-	const recentActivity = [
-		{
+	// Generate recent activity from projects and tasks
+	const recentActivity = [];
+	
+	// Add recent project completions
+	const recentCompletedProjects = projects
+		.filter(p => p.status === 'completed')
+		.sort((a, b) => new Date(b.updatedAt || b.createdAt) - new Date(a.updatedAt || a.createdAt))
+		.slice(0, 2);
+	
+	recentCompletedProjects.forEach(project => {
+		recentActivity.push({
 			action: "Completed project",
-			target: "E-commerce Platform",
-			date: "2 days ago"
-		},
-		{
-			action: "Created task",
-			target: "API Documentation",
-			date: "1 week ago"
-		},
-		{
-			action: "Updated profile",
-			target: "Added new skills",
-			date: "2 weeks ago"
-		},
-		{
-			action: "Joined team",
-			target: "Mobile App Redesign",
-			date: "1 month ago"
-		}
-	];
+			target: project.name,
+			date: new Date(project.updatedAt || project.createdAt).toLocaleDateString()
+		});
+	});
+
+	// Add recent task completions
+	const recentCompletedTasks = tasks
+		.filter(t => t.completed || t.status === 'completed')
+		.sort((a, b) => new Date(b.updatedAt || b.createdAt) - new Date(a.updatedAt || a.createdAt))
+		.slice(0, 2);
+
+	recentCompletedTasks.forEach(task => {
+		recentActivity.push({
+			action: "Completed task",
+			target: task.title,
+			date: new Date(task.updatedAt || task.createdAt).toLocaleDateString()
+		});
+	});
+
+	// Sort by most recent
+	recentActivity.sort((a, b) => new Date(b.date) - new Date(a.date));
+	
+	// Limit to 4 items
+	const limitedActivity = recentActivity.slice(0, 4);
 
 	const handleInputChange = (field, value) => {
 		setProfileData(prev => ({ ...prev, [field]: value }));
 	};
 
-	const handleSave = () => {
-		// TODO: Implement profile update API call
-		setIsEditing(false);
-		toast.success("Profile updated successfully!");
-		console.log("Profile updated:", profileData);
+	const handleSave = async () => {
+		try {
+			await updateProfileMutation.mutateAsync(profileData);
+			setIsEditing(false);
+			toast.success("Profile updated successfully!");
+		} catch (error) {
+			toast.error("Failed to update profile");
+		}
 	};
 
 	const handleCancel = () => {
@@ -119,6 +180,24 @@ export default function ProfilePage() {
 		// TODO: Implement avatar upload
 		toast.info("Avatar upload coming soon!");
 	};
+
+	if (profileLoading) {
+		return (
+			<div className="space-y-6">
+				<div className="flex flex-col md:flex-row md:items-center md:justify-between">
+					<div>
+						<h1 className="text-3xl font-bold tracking-tight">Profile</h1>
+						<p className="text-muted-foreground mt-2">
+							Manage your personal information and preferences.
+						</p>
+					</div>
+				</div>
+				<div className="flex items-center justify-center h-40">
+					<FiUser className="h-8 w-8 animate-spin text-muted-foreground" />
+				</div>
+			</div>
+		);
+	}
 
 	return (
 		<div className="space-y-6">
@@ -136,9 +215,9 @@ export default function ProfilePage() {
 							<Button variant="outline" onClick={handleCancel}>
 								Cancel
 							</Button>
-							<Button onClick={handleSave}>
+							<Button onClick={handleSave} disabled={updateProfileMutation.isPending}>
 								<FiSave className="h-4 w-4 mr-2" />
-								Save Changes
+								{updateProfileMutation.isPending ? "Saving..." : "Save Changes"}
 							</Button>
 						</>
 					) : (
@@ -383,7 +462,7 @@ export default function ProfilePage() {
 					<Card className="p-6">
 						<h2 className="text-xl font-semibold mb-4">Recent Activity</h2>
 						<div className="space-y-3">
-							{recentActivity.map((activity, index) => (
+							{limitedActivity.length > 0 ? limitedActivity.map((activity, index) => (
 								<div key={index} className="text-sm">
 									<p>
 										<span className="font-medium">{activity.action}</span>{" "}
@@ -391,7 +470,9 @@ export default function ProfilePage() {
 									</p>
 									<p className="text-xs text-muted-foreground">{activity.date}</p>
 								</div>
-							))}
+							)) : (
+								<p className="text-sm text-muted-foreground">No recent activity</p>
+							)}
 						</div>
 					</Card>
 				</div>
