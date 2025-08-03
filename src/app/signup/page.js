@@ -4,6 +4,10 @@ import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Separator } from "@/components/ui/separator";
 import { FiMail, FiLock, FiUser, FiEye, FiEyeOff, FiGithub } from "react-icons/fi";
 import { FcGoogle } from "react-icons/fc";
 
@@ -64,66 +68,60 @@ export default function Signup() {
 				{/* Signup Form */}
 				<Card className="p-8">
 					<form onSubmit={handleSubmit} className="space-y-6">
-						<div>
-							<label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-								Full name
-							</label>
+						<div className="space-y-2">
+							<Label htmlFor="name">Full name</Label>
 							<div className="relative">
 								<div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
 									<FiUser className="h-5 w-5 text-gray-400" />
 								</div>
-								<input
+								<Input
 									type="text"
 									id="name"
 									name="name"
 									value={formData.name}
 									onChange={handleChange}
-									required
-									className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 									placeholder="Enter your full name"
+									className="pl-10"
+									required
 								/>
 							</div>
 						</div>
 
-						<div>
-							<label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-								Email address
-							</label>
+						<div className="space-y-2">
+							<Label htmlFor="email">Email address</Label>
 							<div className="relative">
 								<div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
 									<FiMail className="h-5 w-5 text-gray-400" />
 								</div>
-								<input
+								<Input
 									type="email"
 									id="email"
 									name="email"
 									value={formData.email}
 									onChange={handleChange}
-									required
-									className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 									placeholder="Enter your email"
+									className="pl-10"
+									required
 								/>
 							</div>
 						</div>
 
-						<div>
-							<label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-								Password
-							</label>
+						<div className="space-y-2">
+							<Label htmlFor="password">Password</Label>
 							<div className="relative">
 								<div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
 									<FiLock className="h-5 w-5 text-gray-400" />
 								</div>
-								<input
+								<Input
 									type={showPassword ? "text" : "password"}
 									id="password"
 									name="password"
 									value={formData.password}
 									onChange={handleChange}
-									required
-									minLength={8}
-									className="block w-full pl-10 pr-10 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 									placeholder="Create a password (min. 8 characters)"
+									className="pl-10 pr-10"
+									minLength={8}
+									required
 								/>
 								<button
 									type="button"
@@ -139,36 +137,28 @@ export default function Signup() {
 							</div>
 						</div>
 
-						<div>
-							<label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-2">
-								Confirm password
-							</label>
+						<div className="space-y-2">
+							<Label htmlFor="confirmPassword">Confirm password</Label>
 							<div className="relative">
 								<div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
 									<FiLock className="h-5 w-5 text-gray-400" />
 								</div>
-								<input
+								<Input
 									type="password"
 									id="confirmPassword"
 									name="confirmPassword"
 									value={formData.confirmPassword}
 									onChange={handleChange}
-									required
-									className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 									placeholder="Confirm your password"
+									className="pl-10"
+									required
 								/>
 							</div>
 						</div>
 
-						<div className="flex items-center">
-							<input
-								id="terms"
-								name="terms"
-								type="checkbox"
-								required
-								className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-							/>
-							<label htmlFor="terms" className="ml-2 block text-sm text-gray-700">
+						<div className="flex items-center space-x-2">
+							<Checkbox id="terms" required />
+							<Label htmlFor="terms" className="text-sm">
 								I agree to the{" "}
 								<Link href="/terms" className="text-blue-600 hover:text-blue-500">
 									Terms of Service
@@ -177,7 +167,7 @@ export default function Signup() {
 								<Link href="/privacy" className="text-blue-600 hover:text-blue-500">
 									Privacy Policy
 								</Link>
-							</label>
+							</Label>
 						</div>
 
 						<Button type="submit" className="w-full">
@@ -189,7 +179,7 @@ export default function Signup() {
 					<div className="mt-6">
 						<div className="relative">
 							<div className="absolute inset-0 flex items-center">
-								<div className="w-full border-t border-gray-300" />
+								<Separator />
 							</div>
 							<div className="relative flex justify-center text-sm">
 								<span className="px-2 bg-white text-gray-500">Or sign up with</span>

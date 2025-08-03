@@ -5,6 +5,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 import { FiMail, FiMapPin, FiPhone, FiSend } from "react-icons/fi";
 
 export default function Contact() {
@@ -55,67 +58,55 @@ export default function Contact() {
 								<h2 className="text-3xl font-bold text-gray-900 mb-6">Send us a message</h2>
 								<Card className="p-6">
 									<form onSubmit={handleSubmit} className="space-y-6">
-										<div>
-											<label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-												Name
-											</label>
-											<input
-												type="text"
+										<div className="space-y-2">
+											<Label htmlFor="name">Name</Label>
+											<Input
 												id="name"
 												name="name"
+												type="text"
 												value={formData.name}
 												onChange={handleChange}
-												required
-												className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 												placeholder="Your full name"
+												required
 											/>
 										</div>
 
-										<div>
-											<label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-												Email
-											</label>
-											<input
-												type="email"
+										<div className="space-y-2">
+											<Label htmlFor="email">Email</Label>
+											<Input
 												id="email"
 												name="email"
+												type="email"
 												value={formData.email}
 												onChange={handleChange}
-												required
-												className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 												placeholder="your.email@example.com"
+												required
 											/>
 										</div>
 
-										<div>
-											<label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
-												Subject
-											</label>
-											<input
-												type="text"
+										<div className="space-y-2">
+											<Label htmlFor="subject">Subject</Label>
+											<Input
 												id="subject"
 												name="subject"
+												type="text"
 												value={formData.subject}
 												onChange={handleChange}
-												required
-												className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 												placeholder="What's this about?"
+												required
 											/>
 										</div>
 
-										<div>
-											<label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-												Message
-											</label>
-											<textarea
+										<div className="space-y-2">
+											<Label htmlFor="message">Message</Label>
+											<Textarea
 												id="message"
 												name="message"
 												value={formData.message}
 												onChange={handleChange}
-												required
-												rows={5}
-												className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 												placeholder="Tell us more about your inquiry..."
+												rows={5}
+												required
 											/>
 										</div>
 
