@@ -18,8 +18,10 @@ import {
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { FiHome, FiFolder, FiCheckSquare, FiCalendar, FiBarChart2, FiSettings, FiUser, FiCode } from "react-icons/fi";
+import { useProjects } from "@/hooks/useProjects";
+import { useTasks } from "@/hooks/useTasks";
 
-const menuItems = [
+const getMenuItems = (projectCount, taskCount) => [
 	{
 		title: "Overview",
 		href: "/dashboard",
@@ -29,13 +31,13 @@ const menuItems = [
 		title: "Projects",
 		href: "/dashboard/projects",
 		icon: FiFolder,
-		badge: "3", // Mock count
+		badge: projectCount > 0 ? projectCount.toString() : null,
 	},
 	{
 		title: "Tasks",
 		href: "/dashboard/tasks",
 		icon: FiCheckSquare,
-		badge: "12", // Mock count
+		badge: taskCount > 0 ? taskCount.toString() : null,
 	},
 	{
 		title: "Calendar",
@@ -65,6 +67,17 @@ const settingsItems = [
 export function DashboardSidebar() {
 	const pathname = usePathname();
 	const { data: session } = useSession();
+	const { data: projects = [], isLoading: projectsLoading } = useProjects();
+	const { data: tasks = [], isLoading: tasksLoading } = useTasks();
+
+	// Calculate active counts
+	const activeProjects = projects.filter(p => p.status === 'active' || p.status === 'planning').length;
+	const activeTasks = tasks.filter(t => !t.completed && t.status !== 'completed').length;
+
+	const menuItems = getMenuItems(
+		projectsLoading ? 0 : activeProjects || projects.length, 
+		tasksLoading ? 0 : activeTasks || tasks.length
+	);
 
 	const getInitials = (name) => {
 		return name

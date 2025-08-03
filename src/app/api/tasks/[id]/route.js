@@ -63,6 +63,11 @@ export async function PUT(request, { params }) {
 
 		const data = await request.json();
 		
+		// Validate request body
+		if (!data || Object.keys(data).length === 0) {
+			return NextResponse.json({ error: "No data provided" }, { status: 400 });
+		}
+		
 		// Validate fields if provided
 		if (data.status && !['todo', 'in progress', 'review', 'completed'].includes(data.status)) {
 			return NextResponse.json({ error: "Invalid status" }, { status: 400 });
@@ -72,6 +77,7 @@ export async function PUT(request, { params }) {
 			return NextResponse.json({ error: "Invalid priority" }, { status: 400 });
 		}
 
+		await client.connect();
 		const tasksCollection = client.db(process.env.DB_NAME).collection("tasks");
 		
 		const updateData = {
@@ -86,7 +92,8 @@ export async function PUT(request, { params }) {
 			if (data.completed) {
 				updateData.completedAt = new Date();
 			} else {
-				updateData.$unset = { completedAt: 1 };
+				// Remove completedAt field when uncompleting
+				updateData.completedAt = null;
 			}
 		}
 
@@ -108,7 +115,7 @@ export async function PUT(request, { params }) {
 				_id: new ObjectId(id),
 				userId: new ObjectId(session.user.id)
 			},
-			updateData.$unset ? { $set: updateData, $unset: updateData.$unset } : { $set: updateData }
+			{ $set: updateData }
 		);
 
 		if (result.matchedCount === 0) {

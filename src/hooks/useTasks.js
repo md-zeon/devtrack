@@ -152,12 +152,39 @@ export function useToggleTaskCompletion() {
 
 			return response.json();
 		},
+		// Use optimistic updates
+		onMutate: async ({ id, completed }) => {
+			// Cancel outgoing refetches
+			await queryClient.cancelQueries({ queryKey: ["tasks"] });
+
+			// Snapshot the previous value
+			const previousTasks = queryClient.getQueryData(["tasks"]);
+
+			// Optimistically update to the new value
+			queryClient.setQueryData(["tasks"], (old) => {
+				if (!old) return old;
+				return old.map((task) =>
+					task._id === id ? { ...task, completed, status: completed ? 'completed' : 'todo' } : task
+				);
+			});
+
+			// Return a context object with the snapshotted value
+			return { previousTasks };
+		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ["tasks"] });
 			queryClient.invalidateQueries({ queryKey: ["projects"] }); // Update project stats
 		},
-		onError: (error) => {
-			toast.error(error.message);
+		onError: (error, variables, context) => {
+			// Rollback on error
+			if (context?.previousTasks) {
+				queryClient.setQueryData(["tasks"], context.previousTasks);
+			}
+			toast.error(error.message || "Failed to update task status");
+		},
+		onSettled: () => {
+			// Always refetch after error or success
+			queryClient.invalidateQueries({ queryKey: ["tasks"] });
 		},
 	});
 }

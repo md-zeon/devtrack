@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
+import { throttle } from "@/lib/debounce";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -91,12 +92,20 @@ export default function TasksPage() {
 		}
 	};
 
-	const handleToggleComplete = (taskId, currentStatus) => {
-		toggleTaskCompletion.mutate({
-			id: taskId,
-			completed: !currentStatus
-		});
-	};
+	const handleToggleComplete = useCallback(
+		throttle((taskId, currentStatus) => {
+			// Prevent multiple rapid clicks
+			if (toggleTaskCompletion.isPending) {
+				return;
+			}
+			
+			toggleTaskCompletion.mutate({
+				id: taskId,
+				completed: !currentStatus
+			});
+		}, 500), // 500ms throttle
+		[toggleTaskCompletion]
+	);
 
 	const getStatusIcon = (status) => {
 		switch (status?.toLowerCase()) {
@@ -224,6 +233,7 @@ export default function TasksPage() {
 								<Checkbox 
 									checked={task.completed}
 									onCheckedChange={() => handleToggleComplete(task._id, task.completed)}
+									disabled={toggleTaskCompletion.isPending}
 									className="mt-1"
 								/>
 								<div className="flex-1 min-w-0">
