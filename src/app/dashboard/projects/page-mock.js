@@ -27,8 +27,96 @@ import {
 	FiLoader
 } from "react-icons/fi";
 
+// Mock data
+const projects = [
+	{
+		id: 1,
+		name: "E-commerce Platform",
+		description: "Building a modern e-commerce solution with React and Node.js",
+		status: "In Progress",
+		priority: "High",
+		progress: 75,
+		dueDate: "Dec 15, 2024",
+		createdDate: "Nov 1, 2024",
+		tasks: { completed: 12, total: 16 },
+		team: ["John Doe", "Jane Smith"],
+		technologies: ["React", "Node.js", "MongoDB"],
+		timeSpent: "120h"
+	},
+	{
+		id: 2,
+		name: "Mobile App Redesign",
+		description: "Complete UI/UX overhaul of the existing mobile application",
+		status: "Review",
+		priority: "Medium",
+		progress: 90,
+		dueDate: "Dec 10, 2024",
+		createdDate: "Oct 15, 2024",
+		tasks: { completed: 18, total: 20 },
+		team: ["John Doe", "Mike Johnson"],
+		technologies: ["React Native", "Figma"],
+		timeSpent: "85h"
+	},
+	{
+		id: 3,
+		name: "API Documentation",
+		description: "Comprehensive API documentation for the new REST endpoints",
+		status: "Planning",
+		priority: "Low",
+		progress: 25,
+		dueDate: "Dec 20, 2024",
+		createdDate: "Nov 10, 2024",
+		tasks: { completed: 2, total: 8 },
+		team: ["John Doe"],
+		technologies: ["Swagger", "Markdown"],
+		timeSpent: "15h"
+	},
+	{
+		id: 4,
+		name: "DevOps Pipeline",
+		description: "Setting up CI/CD pipeline with automated testing and deployment",
+		status: "Completed",
+		priority: "High",
+		progress: 100,
+		dueDate: "Nov 30, 2024",
+		createdDate: "Oct 1, 2024",
+		tasks: { completed: 10, total: 10 },
+		team: ["John Doe", "Sarah Wilson"],
+		technologies: ["Docker", "GitHub Actions", "AWS"],
+		timeSpent: "60h"
+	},
+	{
+		id: 5,
+		name: "Blog System",
+		description: "Simple blog system with CMS functionality",
+		status: "In Progress",
+		priority: "Medium",
+		progress: 40,
+		dueDate: "Jan 5, 2025",
+		createdDate: "Nov 20, 2024",
+		tasks: { completed: 4, total: 10 },
+		team: ["John Doe"],
+		technologies: ["Next.js", "Prisma", "PostgreSQL"],
+		timeSpent: "32h"
+	},
+	{
+		id: 6,
+		name: "Portfolio Website",
+		description: "Personal portfolio website with modern design",
+		status: "Planning",
+		priority: "Low",
+		progress: 10,
+		dueDate: "Jan 15, 2025",
+		createdDate: "Dec 1, 2024",
+		tasks: { completed: 1, total: 12 },
+		team: ["John Doe"],
+		technologies: ["Astro", "TailwindCSS"],
+		timeSpent: "5h"
+	}
+];
+
 const getStatusColor = (status) => {
-	switch (status?.toLowerCase()) {
+	switch (status.toLowerCase()) {
 		case 'in progress':
 			return 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200';
 		case 'review':
@@ -43,7 +131,7 @@ const getStatusColor = (status) => {
 };
 
 const getPriorityColor = (priority) => {
-	switch (priority?.toLowerCase()) {
+	switch (priority.toLowerCase()) {
 		case 'high':
 			return 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200';
 		case 'medium':
@@ -58,17 +146,14 @@ const getPriorityColor = (priority) => {
 export default function ProjectsPage() {
 	const [searchTerm, setSearchTerm] = useState("");
 	const [filterStatus, setFilterStatus] = useState("all");
-	
-	const { data: projects, isLoading, error } = useProjects();
-	const deleteProject = useDeleteProject();
 
-	const filteredProjects = projects?.filter(project => {
+	const filteredProjects = projects.filter(project => {
 		const matchesSearch = project.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-			project.description?.toLowerCase().includes(searchTerm.toLowerCase());
+			project.description.toLowerCase().includes(searchTerm.toLowerCase());
 		const matchesStatus = filterStatus === "all" || 
 			project.status.toLowerCase() === filterStatus.toLowerCase();
 		return matchesSearch && matchesStatus;
-	}) || [];
+	});
 
 	const handleCreateProject = () => {
 		// TODO: Open create project modal
@@ -81,51 +166,9 @@ export default function ProjectsPage() {
 	};
 
 	const handleDeleteProject = (projectId) => {
-		if (confirm("Are you sure you want to delete this project? This will also delete all associated tasks.")) {
-			deleteProject.mutate(projectId);
-		}
+		// TODO: Implement delete project
+		console.log("Delete project:", projectId);
 	};
-
-	if (isLoading) {
-		return (
-			<div className="space-y-6">
-				<div className="flex flex-col md:flex-row md:items-center md:justify-between">
-					<div>
-						<h1 className="text-3xl font-bold tracking-tight">Projects</h1>
-						<p className="text-muted-foreground mt-2">
-							Manage and track all your development projects in one place.
-						</p>
-					</div>
-				</div>
-				<div className="flex items-center justify-center h-40">
-					<FiLoader className="h-8 w-8 animate-spin text-muted-foreground" />
-				</div>
-			</div>
-		);
-	}
-
-	if (error) {
-		return (
-			<div className="space-y-6">
-				<div className="flex flex-col md:flex-row md:items-center md:justify-between">
-					<div>
-						<h1 className="text-3xl font-bold tracking-tight">Projects</h1>
-						<p className="text-muted-foreground mt-2">
-							Manage and track all your development projects in one place.
-						</p>
-					</div>
-				</div>
-				<Card className="p-6">
-					<div className="text-center">
-						<p className="text-red-600">Error loading projects: {error.message}</p>
-						<Button onClick={() => window.location.reload()} className="mt-4">
-							Retry
-						</Button>
-					</div>
-				</Card>
-			</div>
-		);
-	}
 
 	return (
 		<div className="space-y-6">
@@ -184,7 +227,7 @@ export default function ProjectsPage() {
 			{/* Projects Grid */}
 			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 				{filteredProjects.map((project) => (
-					<Card key={project._id} className="p-6 hover:shadow-lg transition-shadow">
+					<Card key={project.id} className="p-6 hover:shadow-lg transition-shadow">
 						<div className="flex items-start justify-between mb-4">
 							<div className="flex items-center space-x-2">
 								<div className="bg-blue-100 p-2 rounded-lg">
@@ -199,12 +242,12 @@ export default function ProjectsPage() {
 									</Button>
 								</DropdownMenuTrigger>
 								<DropdownMenuContent align="end">
-									<DropdownMenuItem onClick={() => handleEditProject(project._id)}>
+									<DropdownMenuItem onClick={() => handleEditProject(project.id)}>
 										<FiEdit3 className="h-4 w-4 mr-2" />
 										Edit
 									</DropdownMenuItem>
 									<DropdownMenuItem 
-										onClick={() => handleDeleteProject(project._id)}
+										onClick={() => handleDeleteProject(project.id)}
 										className="text-red-600"
 									>
 										<FiTrash2 className="h-4 w-4 mr-2" />
@@ -214,11 +257,9 @@ export default function ProjectsPage() {
 							</DropdownMenu>
 						</div>
 
-						{project.description && (
-							<p className="text-sm text-muted-foreground mb-4 line-clamp-2">
-								{project.description}
-							</p>
-						)}
+						<p className="text-sm text-muted-foreground mb-4 line-clamp-2">
+							{project.description}
+						</p>
 
 						<div className="flex items-center justify-between mb-4">
 							<Badge className={getStatusColor(project.status)}>
@@ -233,12 +274,12 @@ export default function ProjectsPage() {
 						<div className="mb-4">
 							<div className="flex items-center justify-between text-sm mb-2">
 								<span className="text-muted-foreground">Progress</span>
-								<span className="font-medium">{project.progress || 0}%</span>
+								<span className="font-medium">{project.progress}%</span>
 							</div>
 							<div className="w-full bg-gray-200 rounded-full h-2">
 								<div 
 									className="bg-blue-600 h-2 rounded-full transition-all" 
-									style={{ width: `${project.progress || 0}%` }}
+									style={{ width: `${project.progress}%` }}
 								></div>
 							</div>
 						</div>
@@ -248,40 +289,40 @@ export default function ProjectsPage() {
 							<div className="flex items-center justify-between">
 								<div className="flex items-center">
 									<FiCheckSquare className="h-4 w-4 mr-1" />
-									<span>{project.completedTasks || 0}/{project.totalTasks || 0} tasks</span>
+									<span>{project.tasks.completed}/{project.tasks.total} tasks</span>
 								</div>
-								{project.timeSpent && (
-									<div className="flex items-center">
-										<FiClock className="h-4 w-4 mr-1" />
-										<span>{Math.round((project.timeSpent || 0) / 60)}h</span>
-									</div>
-								)}
+								<div className="flex items-center">
+									<FiClock className="h-4 w-4 mr-1" />
+									<span>{project.timeSpent}</span>
+								</div>
 							</div>
-							{project.dueDate && (
+							<div className="flex items-center justify-between">
+								<div className="flex items-center">
+									<FiUsers className="h-4 w-4 mr-1" />
+									<span>{project.team.length} member{project.team.length !== 1 ? 's' : ''}</span>
+								</div>
 								<div className="flex items-center">
 									<FiCalendar className="h-4 w-4 mr-1" />
-									<span>{new Date(project.dueDate).toLocaleDateString()}</span>
+									<span>{project.dueDate}</span>
 								</div>
-							)}
+							</div>
 						</div>
 
 						{/* Technologies */}
-						{project.technologies && project.technologies.length > 0 && (
-							<div className="mt-4">
-								<div className="flex flex-wrap gap-1">
-									{project.technologies.slice(0, 3).map((tech, index) => (
-										<Badge key={index} variant="outline" className="text-xs">
-											{tech}
-										</Badge>
-									))}
-									{project.technologies.length > 3 && (
-										<Badge variant="outline" className="text-xs">
-											+{project.technologies.length - 3}
-										</Badge>
-									)}
-								</div>
+						<div className="mt-4">
+							<div className="flex flex-wrap gap-1">
+								{project.technologies.slice(0, 3).map((tech, index) => (
+									<Badge key={index} variant="outline" className="text-xs">
+										{tech}
+									</Badge>
+								))}
+								{project.technologies.length > 3 && (
+									<Badge variant="outline" className="text-xs">
+										+{project.technologies.length - 3}
+									</Badge>
+								)}
 							</div>
-						)}
+						</div>
 					</Card>
 				))}
 			</div>
