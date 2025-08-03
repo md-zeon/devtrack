@@ -3,8 +3,17 @@ import Footer from "@/components/Footer";
 import { FiCode, FiUsers, FiTarget, FiHeart } from "react-icons/fi";
 
 export const metadata = {
-	title: "About - DevTrack",
-	description: "Learn about DevTrack's mission to help developers organize their projects and boost productivity.",
+	title: "About DevTrack",
+	description: "Learn about DevTrack's mission to streamline project management for developers and development teams worldwide. Discover our vision for the future of development workflow.",
+	openGraph: {
+		title: "About DevTrack - Our Mission & Vision",
+		description: "Discover how DevTrack is revolutionizing project management for developers with modern tools and intuitive workflows.",
+		type: "website",
+	},
+	twitter: {
+		title: "About DevTrack - Our Mission & Vision",
+		description: "Learn about DevTrack's mission to help developers worldwide organize their projects and boost productivity.",
+	},
 };
 
 export default function About() {

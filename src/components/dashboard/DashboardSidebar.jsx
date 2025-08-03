@@ -45,6 +45,11 @@ const getMenuItems = (projectCount, taskCount) => [
 		icon: FiCalendar,
 	},
 	{
+		title: "Time Booking",
+		href: "/dashboard/booking",
+		icon: FiClock,
+	},
+	{
 		title: "Analytics",
 		href: "/dashboard/analytics",
 		icon: FiBarChart2,
