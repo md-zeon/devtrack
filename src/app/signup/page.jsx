@@ -1,5 +1,6 @@
 import Link from "next/link";
 import SignupForm from "./components/SignupForm";
+import { FaCode } from "react-icons/fa";
 
 export default function Signup() {
 	return (
@@ -12,7 +13,7 @@ export default function Signup() {
 						className='inline-flex items-center space-x-2 mb-8'
 					>
 						<div className='bg-blue-600 w-10 h-10 rounded-lg flex items-center justify-center'>
-							<span className='text-white font-bold text-lg'>D</span>
+							<span className='text-white font-bold text-lg'><FaCode /></span>
 						</div>
 						<span className='text-2xl font-bold text-gray-900'>DevTrack</span>
 					</Link>

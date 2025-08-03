@@ -1,5 +1,7 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -8,28 +10,61 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
 import { FiMail, FiLock, FiUser, FiEye, FiEyeOff, FiGithub } from "react-icons/fi";
 import { FcGoogle } from "react-icons/fc";
+import { toast } from "sonner";
 import Link from "next/link";
 
 const SignupForm = () => {
 	const [showPassword, setShowPassword] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 	const [formData, setFormData] = useState({
 		name: "",
 		email: "",
 		password: "",
 		confirmPassword: "",
 	});
+	const router = useRouter();
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 
 		if (formData.password !== formData.confirmPassword) {
-			alert("Passwords do not match!");
+			toast.error("Passwords do not match!");
 			return;
 		}
 
-		// TODO: Implement NextAuth signup
-		console.log("Signup attempt:", formData);
-		alert("Signup functionality will be implemented with NextAuth");
+		if (formData.password.length < 8) {
+			toast.error("Password must be at least 8 characters long");
+			return;
+		}
+
+		setIsLoading(true);
+
+		try {
+			const response = await fetch("/api/auth/register", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					name: formData.name,
+					email: formData.email,
+					password: formData.password,
+				}),
+			});
+
+			const data = await response.json();
+
+			if (response.ok) {
+				toast.success("Account created successfully! Please sign in.");
+				router.push("/login");
+			} else {
+				toast.error(data.error || "Registration failed");
+			}
+		} catch (error) {
+			toast.error("An error occurred. Please try again.");
+		} finally {
+			setIsLoading(false);
+		}
 	};
 
 	const handleChange = (e) => {
@@ -40,13 +75,11 @@ const SignupForm = () => {
 	};
 
 	const handleGoogleSignup = () => {
-		// TODO: Implement Google OAuth with NextAuth
-		alert("Google signup will be implemented with NextAuth");
+		signIn("google", { callbackUrl: "/dashboard" });
 	};
 
 	const handleGithubSignup = () => {
-		// TODO: Implement GitHub OAuth with NextAuth
-		alert("GitHub signup will be implemented with NextAuth");
+		signIn("github", { callbackUrl: "/dashboard" });
 	};
 	return (
 		<Card className='p-8'>
@@ -172,8 +205,9 @@ const SignupForm = () => {
 				<Button
 					type='submit'
 					className='w-full'
+					disabled={isLoading}
 				>
-					Create account
+					{isLoading ? "Creating account..." : "Create account"}
 				</Button>
 			</form>
 

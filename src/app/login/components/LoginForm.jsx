@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -10,19 +12,39 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
 import { FiMail, FiLock, FiEye, FiEyeOff, FiGithub } from "react-icons/fi";
 import { FcGoogle } from "react-icons/fc";
+import { toast } from "sonner";
 
 const LoginForm = () => {
 	const [showPassword, setShowPassword] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 	const [formData, setFormData] = useState({
 		email: "",
 		password: "",
 	});
+	const router = useRouter();
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		// TODO: Implement NextAuth login
-		console.log("Login attempt:", formData);
-		alert("Login functionality will be implemented with NextAuth");
+		setIsLoading(true);
+		
+		try {
+			const result = await signIn("credentials", {
+				email: formData.email,
+				password: formData.password,
+				redirect: false,
+			});
+
+			if (result?.error) {
+				toast.error("Invalid email or password");
+			} else {
+				toast.success("Logged in successfully!");
+				router.push("/dashboard");
+			}
+		} catch (error) {
+			toast.error("An error occurred. Please try again.");
+		} finally {
+			setIsLoading(false);
+		}
 	};
 
 	const handleChange = (e) => {
@@ -33,13 +55,11 @@ const LoginForm = () => {
 	};
 
 	const handleGoogleLogin = () => {
-		// TODO: Implement Google OAuth with NextAuth
-		alert("Google login will be implemented with NextAuth");
+		signIn("google", { callbackUrl: "/dashboard" });
 	};
 
 	const handleGithubLogin = () => {
-		// TODO: Implement GitHub OAuth with NextAuth
-		alert("GitHub login will be implemented with NextAuth");
+		signIn("github", { callbackUrl: "/dashboard" });
 	};
 	return (
 		<Card className='p-8'>
@@ -121,8 +141,9 @@ const LoginForm = () => {
 				<Button
 					type='submit'
 					className='w-full'
+					disabled={isLoading}
 				>
-					Sign in
+					{isLoading ? "Signing in..." : "Sign in"}
 				</Button>
 			</form>
 
