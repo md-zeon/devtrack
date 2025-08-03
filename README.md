@@ -80,7 +80,6 @@ src/
 ├── components/            # UI components (Hero, Features, Cards, etc.)
 ├── lib/                   # Utilities (MongoDB client, auth helpers)
 ├── hooks/                 # Custom React hooks
-└── styles/                # Global styles
 ```
 
 ---

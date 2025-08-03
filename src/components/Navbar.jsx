@@ -22,17 +22,17 @@ export default function Navbar() {
 
 					{/* Desktop Navigation */}
 					<div className="hidden md:flex items-center space-x-8">
-						<Link href="#features" className="text-gray-600 hover:text-gray-900 transition-colors">
+						<Link href="/" className="text-gray-600 hover:text-gray-900 transition-colors">
+							Home
+						</Link>
+						<Link href="/#features" className="text-gray-600 hover:text-gray-900 transition-colors">
 							Features
 						</Link>
-						<Link href="#how-it-works" className="text-gray-600 hover:text-gray-900 transition-colors">
-							How it Works
+						<Link href="/about" className="text-gray-600 hover:text-gray-900 transition-colors">
+							About
 						</Link>
-						<Link href="#testimonials" className="text-gray-600 hover:text-gray-900 transition-colors">
-							Testimonials
-						</Link>
-						<Link href="#faq" className="text-gray-600 hover:text-gray-900 transition-colors">
-							FAQ
+						<Link href="/contact" className="text-gray-600 hover:text-gray-900 transition-colors">
+							Contact
 						</Link>
 					</div>
 
@@ -65,32 +65,32 @@ export default function Navbar() {
 					<div className="md:hidden bg-white border-t border-gray-200">
 						<div className="px-2 pt-2 pb-3 space-y-1">
 							<Link
-								href="#features"
+								href="/"
+								className="block px-3 py-2 text-gray-600 hover:text-gray-900 transition-colors"
+								onClick={toggleMenu}
+							>
+								Home
+							</Link>
+							<Link
+								href="/#features"
 								className="block px-3 py-2 text-gray-600 hover:text-gray-900 transition-colors"
 								onClick={toggleMenu}
 							>
 								Features
 							</Link>
 							<Link
-								href="#how-it-works"
+								href="/about"
 								className="block px-3 py-2 text-gray-600 hover:text-gray-900 transition-colors"
 								onClick={toggleMenu}
 							>
-								How it Works
+								About
 							</Link>
 							<Link
-								href="#testimonials"
+								href="/contact"
 								className="block px-3 py-2 text-gray-600 hover:text-gray-900 transition-colors"
 								onClick={toggleMenu}
 							>
-								Testimonials
-							</Link>
-							<Link
-								href="#faq"
-								className="block px-3 py-2 text-gray-600 hover:text-gray-900 transition-colors"
-								onClick={toggleMenu}
-							>
-								FAQ
+								Contact
 							</Link>
 							<div className="border-t border-gray-200 pt-4 pb-3">
 								<div className="flex flex-col space-y-2 px-3">
