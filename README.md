@@ -18,7 +18,7 @@ DevTrack is a personal developer project and task tracker built with Next.js, Mo
 
 ## Tech Stack
 
-* [Next.js 13 (App Router)](https://nextjs.org/)
+* [Next.js 15 (App Router)](https://nextjs.org/)
 * [NextAuth.js](https://next-auth.js.org/) for authentication
 * [MongoDB](https://www.mongodb.com/) with official Node.js driver for database
 * [Tailwind CSS](https://tailwindcss.com/) for styling
