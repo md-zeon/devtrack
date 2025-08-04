@@ -135,6 +135,14 @@ export default function CalendarPage() {
 		console.log("Create new event");
 	};
 
+	const handlePrevMonth = () => {
+		setCurrentDate(new Date(currentDate.setMonth(currentDate.getMonth() - 1)));
+	};
+
+	const handleNextMonth = () => {
+		setCurrentDate(new Date(currentDate.setMonth(currentDate.getMonth() + 1)));
+	};
+
 	const isLoading = projectsLoading || tasksLoading;
 
 	if (isLoading) {
@@ -178,13 +186,13 @@ export default function CalendarPage() {
 						<div className="flex items-center justify-between mb-6">
 							<h2 className="text-xl font-semibold">{currentMonth}</h2>
 							<div className="flex items-center space-x-2">
-								<Button variant="outline" size="sm">
+								<Button variant="outline" size="sm" onClick={handlePrevMonth}>
 									<FiChevronLeft className="h-4 w-4" />
 								</Button>
-								<Button variant="outline" size="sm">
+								<Button variant="outline" size="sm" onClick={() => setCurrentDate(new Date())}>
 									Today
 								</Button>
-								<Button variant="outline" size="sm">
+								<Button variant="outline" size="sm" onClick={handleNextMonth}>
 									<FiChevronRight className="h-4 w-4" />
 								</Button>
 							</div>
