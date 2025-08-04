@@ -54,7 +54,6 @@ export default function Dashboard() {
 	const router = useRouter();
 	const { data: projects, isLoading: projectsLoading } = useProjects();
 	const { data: tasks, isLoading: tasksLoading } = useTasks();
-	const { data: profile, isLoading: profileLoading } = useProfile();
 
 	// Calculate statistics from real data
 	const stats = [
@@ -123,7 +122,7 @@ export default function Dashboard() {
 				{/* Welcome Section */}
 				<div className="flex flex-col md:flex-row md:items-center md:justify-between">
 					<div>
-						<h1 className="text-3xl font-bold tracking-tight">Welcome back, {session?.user?.name?.split(' ')[0]}! 👋</h1>
+						<h1 className="text-3xl font-bold tracking-tight">Welcome back, {session?.user?.name?.split(' ')[0]}!</h1>
 						<p className="text-muted-foreground mt-2">
 							Here's an overview of your projects and tasks.
 						</p>
@@ -157,7 +156,7 @@ export default function Dashboard() {
 			{/* Welcome Section */}
 			<div className="flex flex-col md:flex-row md:items-center md:justify-between">
 				<div>
-					<h1 className="text-3xl font-bold tracking-tight">Welcome back, {session?.user?.name?.split(' ')[0]}! 👋</h1>
+					<h1 className="text-3xl font-bold tracking-tight">Welcome back, {session?.user?.name?.split(' ')[0]}!</h1>
 					<p className="text-muted-foreground mt-2">
 						Here's an overview of your projects and tasks.
 					</p>

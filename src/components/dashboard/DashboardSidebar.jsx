@@ -71,31 +71,35 @@ export function DashboardSidebar() {
 	const { data: tasks = [], isLoading: tasksLoading } = useTasks();
 
 	// Calculate active counts
-	const activeProjects = projects.filter(p => p.status === 'active' || p.status === 'planning').length;
-	const activeTasks = tasks.filter(t => !t.completed && t.status !== 'completed').length;
+	const activeProjects = projects.filter((p) => p.status === "active" || p.status === "planning").length;
+	const activeTasks = tasks.filter((t) => !t.completed && t.status !== "completed").length;
 
 	const menuItems = getMenuItems(
-		projectsLoading ? 0 : activeProjects || projects.length, 
-		tasksLoading ? 0 : activeTasks || tasks.length
+		projectsLoading ? 0 : activeProjects || projects.length,
+		tasksLoading ? 0 : activeTasks || tasks.length,
 	);
 
 	const getInitials = (name) => {
-		return name
-			?.split(" ")
-			.map(n => n[0])
-			.join("")
-			.toUpperCase() || "U";
+		return (
+			name
+				?.split(" ")
+				.map((n) => n[0])
+				.join("")
+				.toUpperCase() || "U"
+		);
 	};
 
 	return (
 		<Sidebar className='w-64 border-r'>
 			<SidebarHeader className='p-6'>
-				<div className='flex items-center space-x-2'>
-					<div className='bg-blue-600 w-8 h-8 rounded-lg flex items-center justify-center'>
-						<FiCode className='h-5 w-5 text-white' />
+				<Link href="/">
+					<div className='flex items-center space-x-2'>
+						<div className='bg-blue-600 w-8 h-8 rounded-lg flex items-center justify-center'>
+							<FiCode className='h-5 w-5 text-white' />
+						</div>
+						<span className='text-xl font-bold'>DevTrack</span>
 					</div>
-					<span className='text-xl font-bold'>DevTrack</span>
-				</div>
+				</Link>
 			</SidebarHeader>
 
 			<SidebarContent>
