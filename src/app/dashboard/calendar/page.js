@@ -16,6 +16,7 @@ import {
 	FiTarget,
 	FiFlag
 } from "react-icons/fi";
+import { Calendar } from "@/components/ui/calendar";
 
 const getEventTypeColor = (type) => {
 	switch (type) {
@@ -189,14 +190,14 @@ export default function CalendarPage() {
 							</div>
 						</div>
 
-						{/* Calendar Grid Placeholder */}
-						<div className="text-center py-20 border-2 border-dashed border-gray-200 rounded-lg">
-							<FiCalendar className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-							<h3 className="text-lg font-medium mb-2">Calendar Component</h3>
-							<p className="text-muted-foreground">
-								Full calendar component will be implemented with a calendar library like react-big-calendar or @fullcalendar
-							</p>
-						</div>
+						{/* Calendar */}
+						<Calendar
+							mode="single"
+							selected={currentDate}
+							onSelect={setCurrentDate}
+							className="rounded-md border shadow-sm w-full"
+							captionLayout="dropdown"
+						/>
 					</Card>
 				</div>
 

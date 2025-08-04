@@ -11,7 +11,6 @@ import {
 	FiPlus,
 	FiActivity,
 	FiCalendar,
-	FiMoreHorizontal,
 } from "react-icons/fi";
 
 // Mock data
