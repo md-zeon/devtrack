@@ -26,8 +26,10 @@ import {
 	FiClock,
 	FiFolder,
 	FiCheckSquare,
-	FiLoader
+	FiLoader,
+	FiEye
 } from "react-icons/fi";
+import { useRouter } from "next/navigation";
 
 const getStatusColor = (status) => {
 	switch (status?.toLowerCase()) {
@@ -58,6 +60,7 @@ const getPriorityColor = (priority) => {
 };
 
 export default function ProjectsPage() {
+	const router = useRouter(); 
 	const [searchTerm, setSearchTerm] = useState("");
 	const [filterStatus, setFilterStatus] = useState("all");
 	const [editingProjectId, setEditingProjectId] = useState(null);
@@ -72,10 +75,6 @@ export default function ProjectsPage() {
 			project.status.toLowerCase() === filterStatus.toLowerCase();
 		return matchesSearch && matchesStatus;
 	}) || [];
-
-	const handleCreateProject = () => {
-		// This is now handled by the CreateProjectModal component
-	};
 
 	const handleEditProject = (projectId) => {
 		setEditingProjectId(projectId);
@@ -197,6 +196,10 @@ export default function ProjectsPage() {
 									</Button>
 								</DropdownMenuTrigger>
 								<DropdownMenuContent align="end">
+									<DropdownMenuItem onClick={() => router.push(`/dashboard/projects/${project._id}`)}>
+										<FiEye className="h-4 w-4 mr-2" />
+										View
+									</DropdownMenuItem>
 									<DropdownMenuItem onClick={() => handleEditProject(project._id)}>
 										<FiEdit3 className="h-4 w-4 mr-2" />
 										Edit

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -75,9 +75,9 @@ const getStatusIcon = (status) => {
 	}
 };
 
-export default function TaskDetailPage({ params }) {
+export default function TaskDetailPage() {
 	const router = useRouter();
-	const { id } = params;
+	const { id } = useParams();
 	const { data: task, isLoading, error } = useTask(id);
 	const { data: projects = [] } = useProjects();
 	const toggleTaskCompletion = useToggleTaskCompletion();

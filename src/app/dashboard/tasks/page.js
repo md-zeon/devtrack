@@ -17,7 +17,6 @@ import { useTasks, useDeleteTask, useToggleTaskCompletion } from "@/hooks/useTas
 import CreateTaskModal from "@/components/modals/CreateTaskModal";
 import EditTaskModal from "@/components/modals/EditTaskModal";
 import {
-	FiPlus,
 	FiSearch,
 	FiFilter,
 	FiMoreVertical,
@@ -27,8 +26,10 @@ import {
 	FiFlag,
 	FiClock,
 	FiCheckSquare,
-	FiLoader
+	FiLoader,
+	FiEye
 } from "react-icons/fi";
+import { useRouter } from "next/navigation";
 
 const getStatusColor = (status) => {
 	switch (status?.toLowerCase()) {
@@ -59,6 +60,7 @@ const getPriorityColor = (priority) => {
 };
 
 export default function TasksPage() {
+	const router = useRouter();
 	const [searchTerm, setSearchTerm] = useState("");
 	const [filterStatus, setFilterStatus] = useState("all");
 	const [showCompleted, setShowCompleted] = useState(true);
@@ -77,10 +79,6 @@ export default function TasksPage() {
 		const showTask = showCompleted || !task.completed;
 		return matchesSearch && matchesStatus && showTask;
 	}) || [];
-
-	const handleCreateTask = () => {
-		// This is now handled by the CreateTaskModal component
-	};
 
 	const handleEditTask = (taskId) => {
 		setEditingTaskId(taskId);
@@ -103,7 +101,7 @@ export default function TasksPage() {
 				id: taskId,
 				completed: !currentStatus
 			});
-		}, 500), // 500ms throttle
+		}, 300), // 300ms throttle
 		[toggleTaskCompletion]
 	);
 
@@ -304,6 +302,10 @@ export default function TasksPage() {
 									</Button>
 								</DropdownMenuTrigger>
 								<DropdownMenuContent align="end">
+									<DropdownMenuItem onClick={() => router.push(`/dashboard/tasks/${task._id}`)}>
+										<FiEye className="h-4 w-4 mr-2" />
+										View
+									</DropdownMenuItem>
 									<DropdownMenuItem onClick={() => handleEditTask(task._id)}>
 										<FiEdit3 className="h-4 w-4 mr-2" />
 										Edit

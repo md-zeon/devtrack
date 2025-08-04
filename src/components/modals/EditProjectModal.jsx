@@ -15,7 +15,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useProject, useUpdateProject } from "@/hooks/useProjects";
 import { toast } from "sonner";
-import { Edit3, Loader } from "lucide-react";
+import { Loader } from "lucide-react";
 
 export default function EditProjectModal({ projectId, open, onOpenChange }) {
   const [internalOpen, setInternalOpen] = useState(false);
