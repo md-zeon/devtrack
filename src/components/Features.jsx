@@ -1,68 +1,83 @@
+"use client"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { FaFolder, FaTasks, FaChartLine, FaClock, FaCodeBranch, FaUsers } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 const features = [
 	{
 		title: "Project Organization",
 		description: "Organize all your development projects in one centralized dashboard with intuitive categorization.",
-		icon: FaFolder
+		icon: FaFolder,
 	},
 	{
-		title: "Task Management", 
+		title: "Task Management",
 		description: "Create, assign, and track tasks with priority levels, due dates, and progress monitoring.",
-		icon: FaTasks
+		icon: FaTasks,
 	},
 	{
 		title: "Progress Tracking",
 		description: "Visualize your development progress with charts, statistics, and milestone tracking.",
-		icon: FaChartLine
+		icon: FaChartLine,
 	},
 	{
 		title: "Time Tracking",
 		description: "Monitor time spent on projects and tasks to improve productivity and project estimation.",
-		icon: FaClock
+		icon: FaClock,
 	},
 	{
 		title: "Code Integration",
 		description: "Connect with your repositories and track commits, branches, and development activity.",
-		icon: FaCodeBranch
+		icon: FaCodeBranch,
 	},
 	{
 		title: "Team Collaboration",
 		description: "Share projects, assign tasks to team members, and collaborate effectively on development goals.",
-		icon: FaUsers
-	}
+		icon: FaUsers,
+	},
 ];
 
 export default function Features() {
 	return (
-		<section className="py-20 px-4 bg-gray-50 dark:bg-gray-900">
-			<div className="max-w-6xl mx-auto">
-				<div className="text-center mb-16">
-					<h2 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">
+		<section className='py-20 px-4 bg-gray-50 dark:bg-gray-900'>
+			<div className='max-w-6xl mx-auto'>
+				<div className='text-center mb-16'>
+					<h2 className='text-4xl font-bold mb-4 text-gray-900 dark:text-white'>
 						Everything You Need to Track Your Projects
 					</h2>
-					<p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-						DevTrack provides all the tools you need to manage your development projects efficiently and boost your productivity.
+					<p className='text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto'>
+						DevTrack provides all the tools you need to manage your development projects efficiently and boost your
+						productivity.
 					</p>
 				</div>
-				
-				<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-					{features.map((feature, index) => (
-						<Card key={index} className="border-0 shadow-lg hover:shadow-xl transition-shadow">
-							<CardHeader className="text-center">
-								<div className="text-4xl mb-4 text-blue-600 dark:text-blue-400 flex justify-center">
-									<feature.icon />
-								</div>
-								<CardTitle className="text-xl font-semibold">{feature.title}</CardTitle>
-							</CardHeader>
-							<CardContent>
-								<CardDescription className="text-center text-gray-600 dark:text-gray-300">
-									{feature.description}
-								</CardDescription>
-							</CardContent>
-						</Card>
-					))}
+
+				<div className='grid md:grid-cols-2 lg:grid-cols-3 gap-8'>
+					{features.map((feature, index) => {
+						const Icon = feature.icon;
+						return (
+							<motion.div
+								key={index}
+								initial={{ opacity: 0, y: 20 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
+								viewport={{ once: true }}
+								className='cursor-pointer'
+							>
+								<Card className='border-0 shadow-lg h-full'>
+									<CardHeader className='text-center'>
+										<div className='text-4xl mb-4 text-blue-600 dark:text-blue-400 flex justify-center'>
+											<Icon />
+										</div>
+										<CardTitle className='text-xl font-semibold'>{feature.title}</CardTitle>
+									</CardHeader>
+									<CardContent>
+										<CardDescription className='text-center text-gray-600 dark:text-gray-300'>
+											{feature.description}
+										</CardDescription>
+									</CardContent>
+								</Card>
+							</motion.div>
+						);
+					})}
 				</div>
 			</div>
 		</section>
