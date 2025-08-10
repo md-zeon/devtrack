@@ -90,13 +90,13 @@ export default function Footer() {
 								<FiGithub className='h-6 w-6' />
 							</Link>
 							<Link
-								href='#'
+								href='https://www.linkedin.com/in/zeanur-rahaman-zeon/'
 								className='hover:text-white transition-colors'
 							>
 								<FiLinkedin className='h-6 w-6' />
 							</Link>
 							<Link
-								href='#'
+								href='https://x.com/developerzeon'
 								className='hover:text-white transition-colors'
 							>
 								<FiTwitter className='h-6 w-6' />
