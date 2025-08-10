@@ -5,7 +5,7 @@ import { MongoClient, ObjectId } from "mongodb";
 
 const client = new MongoClient(process.env.MONGODB_URI);
 
-// GET /api/user/profile - Get user profile
+// Get user profile
 export async function GET(request) {
 	try {
 		const session = await getServerSession(authOptions);

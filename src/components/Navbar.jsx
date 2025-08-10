@@ -11,7 +11,7 @@ export default function Navbar() {
 	const toggleMenu = () => setIsOpen(!isOpen);
 
 	return (
-		<nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
+		<nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-gray-200">
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="flex justify-between items-center h-16">
 					{/* Logo */}
@@ -24,9 +24,6 @@ export default function Navbar() {
 					<div className="hidden md:flex items-center space-x-8">
 						<Link href="/" className="text-gray-600 hover:text-gray-900 transition-colors">
 							Home
-						</Link>
-						<Link href="/#features" className="text-gray-600 hover:text-gray-900 transition-colors">
-							Features
 						</Link>
 						<Link href="/about" className="text-gray-600 hover:text-gray-900 transition-colors">
 							About
@@ -62,7 +59,7 @@ export default function Navbar() {
 
 				{/* Mobile Navigation */}
 				{isOpen && (
-					<div className="md:hidden bg-white border-t border-gray-200">
+					<div className="md:hidden bg-background border-t border-gray-200">
 						<div className="px-2 pt-2 pb-3 space-y-1">
 							<Link
 								href="/"
@@ -70,13 +67,6 @@ export default function Navbar() {
 								onClick={toggleMenu}
 							>
 								Home
-							</Link>
-							<Link
-								href="/#features"
-								className="block px-3 py-2 text-gray-600 hover:text-gray-900 transition-colors"
-								onClick={toggleMenu}
-							>
-								Features
 							</Link>
 							<Link
 								href="/about"

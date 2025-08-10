@@ -17,7 +17,6 @@ import {
 	FiEdit3,
 	FiSave,
 	FiCamera,
-	FiUser,
 	FiMapPin,
 	FiCalendar,
 	FiGithub,

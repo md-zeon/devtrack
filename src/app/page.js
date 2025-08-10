@@ -13,18 +13,10 @@ export default function Home() {
 			<Navbar />
 			<main>
 				<Hero />
-				<div id="features">
-					<Features />
-				</div>
-				<div id="how-it-works">
-					<HowItWorks />
-				</div>
-				<div id="testimonials">
-					<Testimonials />
-				</div>
-				<div id="faq">
-					<FAQ />
-				</div>
+				<Features />
+				<HowItWorks />
+				<Testimonials />
+				<FAQ />
 				<CTA />
 			</main>
 			<Footer />

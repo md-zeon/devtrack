@@ -31,10 +31,10 @@ export default function Footer() {
 							</li>
 							<li>
 								<Link
-									href='/#features'
+									href='/dashboard'
 									className='hover:text-white transition-colors'
 								>
-									Features
+									Dashboard
 								</Link>
 							</li>
 							<li>
