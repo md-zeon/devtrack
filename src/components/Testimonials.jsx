@@ -79,10 +79,10 @@ export default function Testimonials() {
 							key={index}
 							initial={{ opacity: 0, y: 20 }}
 							whileInView={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.5, delay: index * 0.1 }}
+							transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
 							viewport={{ once: true }}
 						>
-							<Card className='border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1'>
+							<Card className='border-0 shadow-lg h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-1'>
 								<CardContent className='p-6'>
 									<div className='flex items-center mb-4'>
 										{[...Array(testimonial.rating)].map((_, i) => (
@@ -110,15 +110,6 @@ export default function Testimonials() {
 							</Card>
 						</motion.div>
 					))}
-				</div>
-
-				<div className='text-center mt-16'>
-					<Button
-						size='lg'
-						className='px-8 py-4 rounded-xl font-semibold'
-					>
-						Start Your Free Trial
-					</Button>
 				</div>
 			</div>
 		</section>

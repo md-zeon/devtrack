@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { FiMail, FiMapPin, FiPhone, FiSend } from "react-icons/fi";
+import Link from "next/link";
 
 export default function Contact() {
 	const [formData, setFormData] = useState({
@@ -162,8 +163,8 @@ export default function Contact() {
 									<p className="text-gray-600 mb-4">
 										Check our FAQ section for instant answers to common questions.
 									</p>
-									<Button variant="outline" className="w-full">
-										View FAQ
+									<Button>
+										<Link href="/#faq">View FAQ</Link>
 									</Button>
 								</div>
 							</div>

@@ -60,7 +60,6 @@ export default function Features() {
 								whileInView={{ opacity: 1, y: 0 }}
 								transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
 								viewport={{ once: true }}
-								className='cursor-pointer'
 							>
 								<Card className='border-0 shadow-lg h-full'>
 									<CardHeader className='text-center'>
