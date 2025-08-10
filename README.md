@@ -2,7 +2,7 @@
 
 A modern, comprehensive project management and development tracking application built with Next.js, designed specifically for developers and development teams.
 
-![DevTrack Banner](public/banner.png)
+![DevTrack Banner](public/dashboard-preview.png)
 
 ## ✨ Features
 
@@ -87,7 +87,7 @@ A modern, comprehensive project management and development tracking application 
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-username/devtrack.git
+   git clone https://github.com/md-zeon/devtrack.git
    cd devtrack
    ```
 
@@ -161,9 +161,7 @@ devtrack/
 │   │   └── useProfile.js  # User profile management
 │   ├── lib/               # Utility libraries
 │   │   ├── auth.js        # NextAuth configuration
-│   │   ├── models.js      # Database schemas
 │   │   ├── utils.js       # Utility functions
-│   │   └── debounce.js    # Performance utilities
 │   └── styles/            # Global styles
 ├── .env.local             # Environment variables
 ├── components.json        # shadcn/ui configuration
@@ -250,7 +248,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 If you have any questions or need help, please:
 
-1. Check the [Issues](https://github.com/your-username/devtrack/issues) page
+1. Check the [Issues](https://github.com/md-zeon/devtrack/issues) page
 2. Create a new issue with detailed information
 3. Join our community discussions
 
