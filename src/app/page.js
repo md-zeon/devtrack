@@ -4,8 +4,9 @@ import Features from "@/components/Features";
 import HowItWorks from "@/components/HowItWorks";
 import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
-import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
+import Community from "@/components/Community";
+import WhyChooseUs from "@/components/WhyChooseUs";
 
 export default function Home() {
 	return (
@@ -16,8 +17,9 @@ export default function Home() {
 				<Features />
 				<HowItWorks />
 				<Testimonials />
+				<WhyChooseUs />
 				<FAQ />
-				<CTA />
+				<Community />
 			</main>
 			<Footer />
 		</>
