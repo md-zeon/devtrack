@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { MongoClient, ObjectId } from "mongodb";
-import { validateProject, defaultProject } from "@/lib/models";
 
 const client = new MongoClient(process.env.MONGODB_URI);
 

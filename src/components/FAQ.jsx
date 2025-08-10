@@ -47,7 +47,10 @@ const faqs = [
 
 export default function FAQ() {
 	return (
-		<section id="faq" className='py-20 px-4 bg-white dark:bg-gray-800'>
+		<section
+			id='faq'
+			className='py-20 px-4 bg-background dark:bg-gray-800'
+		>
 			<div className='max-w-4xl mx-auto'>
 				<div className='text-center mb-16'>
 					<h2 className='text-4xl font-bold mb-4 text-gray-900 dark:text-white'>Frequently Asked Questions</h2>
@@ -69,7 +72,6 @@ export default function FAQ() {
 							<AccordionTrigger>
 								<div className='flex items-center justify-between w-full'>
 									<span>{faq.question}</span>
-									{/* Optionally add icon here */}
 								</div>
 							</AccordionTrigger>
 							<AccordionContent>

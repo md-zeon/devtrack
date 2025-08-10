@@ -2,6 +2,10 @@
 
 A modern, comprehensive project management and development tracking application built with Next.js, designed specifically for developers and development teams.
 
+# Live Link
+
+[DevTrack](https://devtrack-gamma.vercel.app/)
+
 ![DevTrack Banner](public/dashboard-preview.png)
 
 ## ✨ Features

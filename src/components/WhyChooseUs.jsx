@@ -44,7 +44,7 @@ export default function WhyChooseUs() {
 						whileInView={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.5, delay: idx * 0.15, ease: "easeOut" }}
 						viewport={{ once: true }}
-						className='bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 flex flex-col items-center text-center hover:shadow-xl transition-transform hover:-translate-y-1 cursor-default'
+						className='bg-background dark:bg-gray-800 rounded-lg shadow-lg p-8 flex flex-col items-center text-center hover:shadow-xl transition-transform hover:-translate-y-1 cursor-default'
 					>
 						<Icon className='text-blue-600 dark:text-blue-400 w-12 h-12 mb-5' />
 						<h3 className='text-xl font-semibold mb-3 text-gray-900 dark:text-white'>{title}</h3>

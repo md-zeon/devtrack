@@ -13,7 +13,7 @@ export const metadata = {
 	},
 	description:
 		"A modern project management and development tracking application built for developers and development teams. Track projects, manage tasks, and boost productivity.",
-	metadataBase: new URL("https://www.devtrack.com"),
+	metadataBase: new URL("https://devtrack-gamma.vercel.app"),
 	keywords: ["project management", "development tracking", "task management", "developer tools", "productivity"],
 	authors: [{ name: "Zeanur Rahaman Zeon" }],
 	creator: "Zeanur Rahaman Zeon",
@@ -21,7 +21,7 @@ export const metadata = {
 	openGraph: {
 		type: "website",
 		locale: "en_US",
-		url: "https://devtrack.app",
+		url: "https://devtrack-gamma.vercel.app",
 		title: "DevTrack - Project Management for Developers",
 		description: "Modern project management and development tracking application for developers and teams.",
 		siteName: "DevTrack",
