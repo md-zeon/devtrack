@@ -30,8 +30,7 @@ export default function Contact() {
 					<div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center'>
 						<h1 className='text-4xl md:text-6xl font-bold text-gray-900 mb-6'>Contact Us</h1>
 						<p className='text-xl text-gray-600 max-w-3xl mx-auto'>
-							Have questions, feedback, or need support? We'd love to hear from you. Get in touch and we'll respond as
-							soon as possible.
+							Have questions, feedback, or need support? We&apos;d love to hear from you. Get in touch and we&apos;ll respond as soon as possible.
 						</p>
 					</div>
 				</section>
@@ -54,7 +53,7 @@ export default function Contact() {
 										<div>
 											<h3 className='text-lg font-semibold text-gray-900 mb-1'>Email</h3>
 											<p className='text-gray-600'>zeon.cse@gmail.com</p>
-											<p className='text-sm text-gray-500'>We'll respond within 24 hours</p>
+											<p className='text-sm text-gray-500'>We&apos;ll respond within 24 hours</p>
 										</div>
 									</div>
 

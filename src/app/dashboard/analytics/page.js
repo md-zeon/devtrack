@@ -40,8 +40,7 @@ export default function AnalyticsPage() {
 					<div className='space-y-3'>
 						<h2 className='text-3xl font-bold'>Advanced Analytics</h2>
 						<p className='text-xl text-muted-foreground max-w-2xl mx-auto'>
-							We're building powerful analytics to help you track productivity, analyze patterns, and optimize your
-							workflow.
+							We&apos;re building powerful analytics to help you track productivity, analyze patterns, and optimize your workflow.
 						</p>
 					</div>
 
@@ -105,7 +104,7 @@ export default function AnalyticsPage() {
 						<div className='bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg border border-blue-200 dark:border-blue-800'>
 							<h3 className='font-semibold text-blue-900 dark:text-blue-100 mb-2'>🚧 Under Development</h3>
 							<p className='text-blue-700 dark:text-blue-300 text-sm'>
-								This feature is currently being developed and will be available in a future update. We're working hard
+								This feature is currently being developed and will be available in a future update. We&apos;re working hard
 								to bring you comprehensive analytics to boost your productivity!
 							</p>
 						</div>

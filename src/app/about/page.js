@@ -28,7 +28,7 @@ export default function About() {
 							About DevTrack
 						</h1>
 						<p className="text-xl text-gray-600 max-w-3xl mx-auto">
-							We're on a mission to help developers organize their projects, track tasks, and boost productivity with clean, intuitive tools.
+							We&apos;re on a mission to help developers organize their projects, track tasks, and boost productivity with clean, intuitive tools.
 						</p>
 					</div>
 				</section>
@@ -95,10 +95,10 @@ export default function About() {
 								DevTrack was born out of frustration with complex project management tools that seemed designed for everything except development work. As developers ourselves, we found existing solutions either too bloated with unnecessary features or too simple to handle the complexity of modern software projects.
 							</p>
 							<p>
-								We wanted something different - a tool that understood the developer mindset, respected our workflows, and made project management feel natural rather than burdensome. That's how DevTrack came to life.
+								We wanted something different - a tool that understood the developer mindset, respected our workflows, and made project management feel natural rather than burdensome. That&apos;s how DevTrack came to life.
 							</p>
 							<p>
-								Today, DevTrack helps thousands of developers worldwide stay organized, meet deadlines, and ship better software. We're constantly improving based on feedback from our community of users who, like us, believe that great tools make great developers even better.
+								Today, DevTrack helps thousands of developers worldwide stay organized, meet deadlines, and ship better software. We&apos;re constantly improving based on feedback from our community of users who, like us, believe that great tools make great developers even better.
 							</p>
 						</div>
 					</div>

@@ -124,7 +124,7 @@ export default function Dashboard() {
 					<div>
 						<h1 className="text-3xl font-bold tracking-tight">Welcome back, {session?.user?.name?.split(' ')[0]}!</h1>
 						<p className="text-muted-foreground mt-2">
-							Here's an overview of your projects and tasks.
+							Here&apos;s an overview of your projects and tasks.
 						</p>
 					</div>
 				</div>
@@ -158,7 +158,7 @@ export default function Dashboard() {
 				<div>
 					<h1 className="text-3xl font-bold tracking-tight">Welcome back, {session?.user?.name?.split(' ')[0]}!</h1>
 					<p className="text-muted-foreground mt-2">
-						Here's an overview of your projects and tasks.
+						Here&apos;s an overview of your projects and tasks.
 					</p>
 				</div>
 				<div className="flex items-center space-x-2 mt-4 md:mt-0">

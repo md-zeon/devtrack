@@ -256,7 +256,7 @@ export default function CalendarPage() {
 
 					{/* Today's Schedule */}
 					<Card className="p-6">
-						<h2 className="text-xl font-semibold mb-4">Today's Schedule</h2>
+						<h2 className="text-xl font-semibold mb-4">Today&apos;s Schedule</h2>
 						<div className="space-y-3">
 							{todayEvents.length > 0 ? todayEvents.map((event) => {
 								const EventIcon = getEventIcon(event.type);
