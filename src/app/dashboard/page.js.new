@@ -189,9 +189,9 @@ export default function Dashboard() {
 				))}
 			</div>
 
-			<div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+			<div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 				{/* Recent Projects */}
-				<Card className="p-6">
+				<Card className="p-6 lg:col-span-2">
 					<div className="flex items-center justify-between mb-6">
 						<h2 className="text-xl font-semibold">Recent Projects</h2>
 						<Button variant="ghost" size="sm" onClick={() => router.push("/dashboard/projects")}>
@@ -246,47 +246,53 @@ export default function Dashboard() {
 					</div>
 				</Card>
 
-				{/* Recent Activity */}
-				<Card className="p-6">
-					<div className="flex items-center justify-between mb-6">
-						<h2 className="text-xl font-semibold">Recent Activity</h2>
-						<Button variant="ghost" size="sm" onClick={() => router.push("/dashboard/tasks")}>
-							<FiActivity className="h-4 w-4" />
-						</Button>
-					</div>
-					<div className="space-y-4">
-						{recentActivity.length > 0 ? (
-							recentActivity.map((activity) => (
-								<div key={activity.id} className="flex items-start space-x-3">
-									<div className="bg-blue-100 p-2 rounded-full">
-										<FiActivity className="h-3 w-3 text-blue-600" />
+				{/* Subscription and Activity Column */}
+				<div className="space-y-6">
+					{/* Subscription Card */}
+					<SubscriptionCard />
+					
+					{/* Recent Activity */}
+					<Card className="p-6">
+						<div className="flex items-center justify-between mb-6">
+							<h2 className="text-xl font-semibold">Recent Activity</h2>
+							<Button variant="ghost" size="sm" onClick={() => router.push("/dashboard/tasks")}>
+								<FiActivity className="h-4 w-4" />
+							</Button>
+						</div>
+						<div className="space-y-4">
+							{recentActivity.length > 0 ? (
+								recentActivity.map((activity) => (
+									<div key={activity.id} className="flex items-start space-x-3">
+										<div className="bg-blue-100 p-2 rounded-full">
+											<FiActivity className="h-3 w-3 text-blue-600" />
+										</div>
+										<div className="flex-1">
+											<p className="text-sm">
+												<span className="font-medium">{activity.action}</span>{" "}
+												<span className="text-blue-600">{activity.target}</span>
+												{activity.project && (
+													<span className="text-muted-foreground"> in {activity.project}</span>
+												)}
+											</p>
+											<p className="text-xs text-muted-foreground">{activity.time}</p>
+										</div>
 									</div>
-									<div className="flex-1">
-										<p className="text-sm">
-											<span className="font-medium">{activity.action}</span>{" "}
-											<span className="text-blue-600">{activity.target}</span>
-											{activity.project && (
-												<span className="text-muted-foreground"> in {activity.project}</span>
-											)}
-										</p>
-										<p className="text-xs text-muted-foreground">{activity.time}</p>
-									</div>
+								))
+							) : (
+								<div className="text-center py-8">
+									<FiActivity className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+									<p className="text-muted-foreground">No recent activity</p>
 								</div>
-							))
-						) : (
-							<div className="text-center py-8">
-								<FiActivity className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-								<p className="text-muted-foreground">No recent activity</p>
-							</div>
-						)}
-					</div>
-				</Card>
+							)}
+						</div>
+					</Card>
+				</div>
 			</div>
 
 			{/* Quick Actions */}
 			<Card className="p-6">
 				<h2 className="text-xl font-semibold mb-4">Quick Actions</h2>
-				<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+				<div className="grid grid-cols-1 md:grid-cols-4 gap-4">
 					<Button variant="outline" className="h-20 flex flex-col items-center justify-center" onClick={handleNewProject}>
 						<FiFolder className="h-6 w-6 mb-2" />
 						<span>Create Project</span>
@@ -298,6 +304,10 @@ export default function Dashboard() {
 					<Button variant="outline" className="h-20 flex flex-col items-center justify-center" onClick={() => router.push("/dashboard/calendar")}>
 						<FiCalendar className="h-6 w-6 mb-2" />
 						<span>View Calendar</span>
+					</Button>
+					<Button variant="outline" className="h-20 flex flex-col items-center justify-center" onClick={() => router.push("/dashboard/subscription")}>
+						<FiCreditCard className="h-6 w-6 mb-2" />
+						<span>Manage Subscription</span>
 					</Button>
 				</div>
 			</Card>

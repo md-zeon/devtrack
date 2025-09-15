@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { FiHome, FiFolder, FiCheckSquare, FiCalendar, FiBarChart2, FiSettings, FiUser, FiCode } from "react-icons/fi";
+import { FiHome, FiFolder, FiCheckSquare, FiCalendar, FiBarChart2, FiSettings, FiUser, FiCode, FiCreditCard } from "react-icons/fi";
 import { useProjects } from "@/hooks/useProjects";
 import { useTasks } from "@/hooks/useTasks";
 
@@ -56,6 +56,11 @@ const settingsItems = [
 		title: "Profile",
 		href: "/dashboard/profile",
 		icon: FiUser,
+	},
+	{
+		title: "Subscription",
+		href: "/dashboard/subscription",
+		icon: FiCreditCard,
 	},
 	{
 		title: "Settings",

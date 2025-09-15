@@ -7,6 +7,7 @@ import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 import Community from "@/components/Community";
 import WhyChooseUs from "@/components/WhyChooseUs";
+import Pricing from "@/components/Pricing";
 
 export default function Home() {
 	return (
@@ -18,6 +19,7 @@ export default function Home() {
 				<HowItWorks />
 				<Testimonials />
 				<WhyChooseUs />
+				<Pricing />
 				<FAQ />
 				<Community />
 			</main>
