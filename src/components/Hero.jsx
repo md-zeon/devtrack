@@ -52,11 +52,11 @@ export default function Hero() {
 				<div className="flex flex-wrap justify-center gap-4 text-sm">
 					<Badge variant="secondary" className="px-4 py-2 flex items-center gap-2">
 						<FiCheck className="h-4 w-4 text-green-400" />
-						No Credit Card Required
+						Free Plan Available
 					</Badge>
 					<Badge variant="secondary" className="px-4 py-2 flex items-center gap-2">
 						<FiCheck className="h-4 w-4 text-green-400" />
-						Free Forever Plan
+						Track your progress with ease
 					</Badge>
 					<Badge variant="secondary" className="px-4 py-2 flex items-center gap-2">
 						<FiCheck className="h-4 w-4 text-green-400" />
